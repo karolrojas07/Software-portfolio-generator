@@ -4,7 +4,7 @@ defmodule SoftwarePortfolioGenerator.ProjectTechnology do
 
   schema "project_technologies" do
 
-    field :profile_id, :id
+    field :technology_id, :id
     field :project_id, :id
 
     timestamps(type: :utc_datetime)
@@ -13,7 +13,7 @@ defmodule SoftwarePortfolioGenerator.ProjectTechnology do
   @doc false
   def changeset(project_technology, attrs) do
     project_technology
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:technology_id, :project_id])
+    |> validate_required([:technology_id, :project_id])
   end
 end

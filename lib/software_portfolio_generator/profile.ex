@@ -5,7 +5,8 @@ defmodule SoftwarePortfolioGenerator.Profile do
   schema "profiles" do
     field :firstname, :string
     field :lastname, :string
-    field :age, :date
+    field :title, :string
+    field :birthdate, :date
     field :email, :string
     field :city, :string
     field :state, :string
@@ -19,7 +20,7 @@ defmodule SoftwarePortfolioGenerator.Profile do
   @doc false
   def changeset(profile, attrs) do
     profile
-    |> cast(attrs, [:firstname, :lastname, :age, :email, :city, :state, :country, :zipcode, :phone_number])
+    |> cast(attrs, [:firstname, :lastname, :birthdate, :email, :city, :state, :country, :zipcode, :phone_number])
     |> validate_required([:firstname, :lastname, :email])
   end
 end

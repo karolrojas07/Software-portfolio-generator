@@ -5,7 +5,8 @@ defmodule SoftwarePortfolioGenerator.Repo.Migrations.CreateProfiles do
     create table(:profiles) do
       add :firstname, :string
       add :lastname, :string
-      add :age, :date
+      add :title, :string
+      add :birthdate, :date
       add :email, :string
       add :city, :string
       add :state, :string

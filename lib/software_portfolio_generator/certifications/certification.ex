@@ -1,4 +1,4 @@
-defmodule SoftwarePortfolioGenerator.Certification do
+defmodule SoftwarePortfolioGenerator.Certifications.Certification do
   use Ecto.Schema
   import Ecto.Changeset
 

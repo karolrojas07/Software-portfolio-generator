@@ -1,4 +1,4 @@
-defmodule SoftwarePortfolioGenerator.ProfileJob do
+defmodule SoftwarePortfolioGenerator.Jobs.ProfileJob do
   use Ecto.Schema
   import Ecto.Changeset
 

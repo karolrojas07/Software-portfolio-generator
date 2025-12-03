@@ -1,4 +1,4 @@
-defmodule SoftwarePortfolioGenerator.Language do
+defmodule SoftwarePortfolioGenerator.Languages.Language do
   use Ecto.Schema
   import Ecto.Changeset
 

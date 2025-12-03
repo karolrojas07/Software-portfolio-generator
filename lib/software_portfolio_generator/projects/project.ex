@@ -1,4 +1,4 @@
-defmodule SoftwarePortfolioGenerator.Project do
+defmodule SoftwarePortfolioGenerator.Projects.Project do
   use Ecto.Schema
   import Ecto.Changeset
 

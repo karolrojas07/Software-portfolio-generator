@@ -1,4 +1,4 @@
-defmodule SoftwarePortfolioGeneratorWeb.PageController do
+defmodule SoftwarePortfolioGeneratorWeb.ProfileController do
   use SoftwarePortfolioGeneratorWeb, :controller
 
   def home(conn, _params) do

@@ -1,4 +1,4 @@
-defmodule SoftwarePortfolioGeneratorWeb.PageControllerTest do
+defmodule SoftwarePortfolioGeneratorWeb.ProfileControllerTest do
   use SoftwarePortfolioGeneratorWeb.ConnCase
 
   test "GET /", %{conn: conn} do

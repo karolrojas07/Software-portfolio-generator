@@ -4,8 +4,8 @@ defmodule SoftwarePortfolioGenerator.Projects.ProjectTechnology do
 
   schema "project_technologies" do
 
-    field :technology_id, :id
-    field :project_id, :id
+    belongs_to :technology, SoftwarePortfolioGenerator.Technologies.Technology, foreign_key: :technology_id, references: :id
+    belongs_to :project, SoftwarePortfolioGenerator.Projects.Project, foreign_key: :project_id, references: :id
 
     timestamps(type: :utc_datetime)
   end
@@ -13,7 +13,7 @@ defmodule SoftwarePortfolioGenerator.Projects.ProjectTechnology do
   @doc false
   def changeset(project_technology, attrs) do
     project_technology
-    |> cast(attrs, [:technology_id, :project_id])
-    |> validate_required([:technology_id, :project_id])
+    |> cast(attrs, [])
+    |> validate_required([])
   end
 end

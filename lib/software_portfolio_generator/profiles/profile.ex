@@ -14,6 +14,12 @@ defmodule SoftwarePortfolioGenerator.Profiles.Profile do
     field :zipcode, :string
     field :phone_number, :string
 
+    has_many :certifications, SoftwarePortfolioGenerator.Certifications.Certification, foreign_key: :profile_id, references: :id
+    has_many :social_networks, SoftwarePortfolioGenerator.SocialNetworks.SocialNetwork, foreign_key: :profile_id, references: :id
+    has_many :profile_jobs, SoftwarePortfolioGenerator.Jobs.ProfileJob, foreign_key: :profile_id, references: :id
+    has_many :profile_languages, SoftwarePortfolioGenerator.Profiles.ProfileLanguage, foreign_key: :profile_id, references: :id
+    has_many :profile_technologies, SoftwarePortfolioGenerator.Profiles.ProfileTechnology, foreign_key: :profile_id, references: :id
+
     timestamps(type: :utc_datetime)
   end
 

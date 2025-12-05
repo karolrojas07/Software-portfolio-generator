@@ -6,7 +6,8 @@ defmodule SoftwarePortfolioGenerator.SocialNetworks.SocialNetwork do
     field :label, :string
     field :link, :string
     field :icon_link, :string
-    field :profile_id, :id
+
+    belongs_to :profile, SoftwarePortfolioGenerator.Profiles.Profile, foreign_key: :profile_id, references: :id
 
     timestamps(type: :utc_datetime)
   end

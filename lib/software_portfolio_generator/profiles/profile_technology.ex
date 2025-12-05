@@ -4,8 +4,9 @@ defmodule SoftwarePortfolioGenerator.Profiles.ProfileTechnology do
 
   schema "profile_technologies" do
     field :mastery, :float
-    field :profile_id, :id
-    field :technology_id, :id
+
+    belongs_to :profile, SoftwarePortfolioGenerator.Profiles.Profile, foreign_key: :profile_id, references: :id
+    belongs_to :technology, SoftwarePortfolioGenerator.Technologies.Technology, foreign_key: :technology_id, references: :id
 
     timestamps(type: :utc_datetime)
   end

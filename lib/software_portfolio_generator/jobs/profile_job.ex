@@ -8,7 +8,9 @@ defmodule SoftwarePortfolioGenerator.Jobs.ProfileJob do
     field :description, :string
     field :start_date, :date
     field :end_date, :date
-    field :profile_id, :id
+
+    has_many :projects, SoftwarePortfolioGenerator.Projects.Project, foreign_key: :profile_job_id, references: :id
+    belongs_to :profile, SoftwarePortfolioGenerator.Profiles.Profile, foreign_key: :profile_id, references: :id
 
     timestamps(type: :utc_datetime)
   end

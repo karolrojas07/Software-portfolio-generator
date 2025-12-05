@@ -4,8 +4,9 @@ defmodule SoftwarePortfolioGenerator.Profiles.ProfileLanguage do
 
   schema "profile_languages" do
     field :level, :string
-    field :profile_id, :id
-    field :language_id, :id
+
+    belongs_to :profile, SoftwarePortfolioGenerator.Profiles.Profile, foreign_key: :profile_id, references: :id
+    belongs_to :language, SoftwarePortfolioGenerator.Languages.Language, foreign_key: :language_id, references: :id
 
     timestamps(type: :utc_datetime)
   end

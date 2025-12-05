@@ -8,7 +8,8 @@ defmodule SoftwarePortfolioGenerator.Certifications.Certification do
     field :description, :string
     field :link, :string
     field :end_date, :date
-    field :profile_id, :id
+
+    belongs_to :profile, SoftwarePortfolioGenerator.Profiles.Profile, foreign_key: :profile_id, references: :id
 
     timestamps(type: :utc_datetime)
   end

@@ -5,6 +5,8 @@ defmodule SoftwarePortfolioGenerator.Languages.Language do
   schema "languages" do
     field :name, :string
 
+    has_many :profile_languages, SoftwarePortfolioGenerator.Profiles.ProfileLanguage, foreign_key: :language_id, references: :id
+
     timestamps(type: :utc_datetime)
   end
 

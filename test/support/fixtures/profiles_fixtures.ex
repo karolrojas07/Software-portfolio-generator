@@ -27,7 +27,7 @@ defmodule SoftwarePortfolioGenerator.ProfilesFixtures do
       |> Enum.into(%{
 
       })
-      |> SoftwarePortfolioGenerator.Profiles.create_certification()
+      |> SoftwarePortfolioGenerator.Certifications.create_certification()
 
     certification
   end

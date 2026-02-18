@@ -35,7 +35,13 @@ defmodule SoftwarePortfolioGenerator.Profiles do
       ** (Ecto.NoResultsError)
 
   """
-  def get_profile!(id), do: Repo.get!(Profile, id)
+  def get_profile!(id) do
+    Repo.get!(Profile, id)
+    |> Repo.preload([:certifications, :social_networks])
+    |> Repo.preload([profile_languages: :language])
+    |> Repo.preload([profile_technologies: [technology: :category]])
+    |> Repo.preload([profile_jobs: [projects: [project_technologies: [technology: :category]]]])
+  end
 
   @doc """
   Creates a profile.

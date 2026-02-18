@@ -17,7 +17,7 @@ defmodule SoftwarePortfolioGeneratorWeb.Router do
   scope "/", SoftwarePortfolioGeneratorWeb do
     pipe_through :browser
 
-    get "/", ProfileController, :home
+    live "/", ProfileLive
   end
 
   # Other scopes may use custom stacks.

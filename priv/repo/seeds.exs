@@ -11,17 +11,17 @@
 # and so on) as they will fail if something goes wrong.
 
 alias SoftwarePortfolioGenerator.Repo
-alias SoftwarePortfolioGenerator.Language
-alias SoftwarePortfolioGenerator.Technology
-alias SoftwarePortfolioGenerator.TechnologyCategory
-alias SoftwarePortfolioGenerator.Profile
-alias SoftwarePortfolioGenerator.ProfileJob
-alias SoftwarePortfolioGenerator.ProfileLanguage
-alias SoftwarePortfolioGenerator.ProfileTechnology
-alias SoftwarePortfolioGenerator.Project
-alias SoftwarePortfolioGenerator.ProjectTechnology
-alias SoftwarePortfolioGenerator.SocialNetwork
-alias SoftwarePortfolioGenerator.Certification
+alias SoftwarePortfolioGenerator.Languages.Language
+alias SoftwarePortfolioGenerator.Technologies.Technology
+alias SoftwarePortfolioGenerator.Technologies.TechnologyCategory
+alias SoftwarePortfolioGenerator.Profiles.Profile
+alias SoftwarePortfolioGenerator.Jobs.ProfileJob
+alias SoftwarePortfolioGenerator.Profiles.ProfileLanguage
+alias SoftwarePortfolioGenerator.Profiles.ProfileTechnology
+alias SoftwarePortfolioGenerator.Projects.Project
+alias SoftwarePortfolioGenerator.Projects.ProjectTechnology
+alias SoftwarePortfolioGenerator.SocialNetworks.SocialNetwork
+alias SoftwarePortfolioGenerator.Certifications.Certification
 
 # Profiles
 Repo.insert!(%Profile{firstname: "Karol Liseth", lastname: "Rojas Bermudez", title: "Software Engineer - Senior Backend Developer", birthdate: ~D[2000-01-20] , email: "karol.rojasb@gmail.com", city: "Manizales", state: "Caldas", country: "Colombia", zipcode: "17002", phone_number: "+57 3155860681"})
@@ -35,18 +35,18 @@ Repo.insert!(%ProfileLanguage{profile_id: 1, language_id: 1})
 Repo.insert!(%ProfileLanguage{profile_id: 1, language_id: 2})
 
 # Certifications
-Repo.insert!(%Certification{issuer: "Universidad Autonoma de Manizales", name: "Graduate Electronic Engineering", description: "", link: "", end_date: ~D[2022-12-12]})
-Repo.insert!(%Certification{issuer: "Universidad Autonoma de Manizales", name: "Graduate System Engineering", description: "", link: "", end_date: ~D[2022-12-12]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "Angular & NodeJS - The MEAN Stack Guide ", description: "", link: "https://www.udemy.com/certificate/UC-9e2bba4c-35ac-4eb5-a0e5-10a426b9c6c1/", end_date: ~D[2021-12-14]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "PostgreSQL complete course. Learn from zero", description: "", link: "https://www.udemy.com/certificate/UC-50510695-74df-44c7-b4e8-effed63dca6c/", end_date: ~D[2025-01-01]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "JavaScript: Understanding the Weird Parts ", description: "", link: "https://www.udemy.com/certificate/UC-2bba988a-c799-4e29-9124-2b880ea6c2c2/", end_date: ~D[2024-01-19]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "Build ASP.NET Core Web API - Scratch To Finish", description: "", link: "https://www.udemy.com/certificate/UC-1504d9c5-6f02-4109-924f-1c7b722f1cae/", end_date: ~D[2024-01-13]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "API and Web Service Introduction", description: "", link: "https://www.udemy.com/certificate/UC-feba173e-7bec-4777-94cb-b44a60d030f4/", end_date: ~D[2024-01-04]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "REST API vs GraphQL vs gRPC - The Complete Guide", description: "", link: "https://www.udemy.com/certificate/UC-31c3b34b-1244-4157-af55-860c209c0a81/?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com", end_date: ~D[2025-11-30]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "C# Intermediate: Classes, Interfaces and OOP", description: "", link: "", end_date: ~D[2025-01-01]})
-Repo.insert!(%Certification{issuer: "Udemy", name: "Stellar Blockchain Tutorial - Complete Beginner Training", description: "", link: "https://www.udemy.com/certificate/UC-8d523be0-7fec-489f-8a25-d0ccfcb05197/", end_date: ~D[2023-02-12]})
-Repo.insert!(%Certification{issuer: "DeepLearningAI", name: "Multi AI Agent systems with CrewAI", description: "", link: "", end_date: ~D[2025-07-10]})
-Repo.insert!(%Certification{issuer: "DeepLearningAI", name: "Practical Multi AI agents and advanced use cases with CrewAI", description: "", link: "", end_date: ~D[2025-08-04]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Universidad Autonoma de Manizales", name: "Graduate Electronic Engineering", description: "", link: "", end_date: ~D[2022-12-12]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Universidad Autonoma de Manizales", name: "Graduate System Engineering", description: "", link: "", end_date: ~D[2022-12-12]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "Angular & NodeJS - The MEAN Stack Guide ", description: "", link: "https://www.udemy.com/certificate/UC-9e2bba4c-35ac-4eb5-a0e5-10a426b9c6c1/", end_date: ~D[2021-12-14]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "PostgreSQL complete course. Learn from zero", description: "", link: "https://www.udemy.com/certificate/UC-50510695-74df-44c7-b4e8-effed63dca6c/", end_date: ~D[2025-01-01]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "JavaScript: Understanding the Weird Parts ", description: "", link: "https://www.udemy.com/certificate/UC-2bba988a-c799-4e29-9124-2b880ea6c2c2/", end_date: ~D[2024-01-19]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "Build ASP.NET Core Web API - Scratch To Finish", description: "", link: "https://www.udemy.com/certificate/UC-1504d9c5-6f02-4109-924f-1c7b722f1cae/", end_date: ~D[2024-01-13]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "API and Web Service Introduction", description: "", link: "https://www.udemy.com/certificate/UC-feba173e-7bec-4777-94cb-b44a60d030f4/", end_date: ~D[2024-01-04]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "REST API vs GraphQL vs gRPC - The Complete Guide", description: "", link: "https://www.udemy.com/certificate/UC-31c3b34b-1244-4157-af55-860c209c0a81/?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com", end_date: ~D[2025-11-30]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "C# Intermediate: Classes, Interfaces and OOP", description: "", link: "", end_date: ~D[2025-01-01]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "Udemy", name: "Stellar Blockchain Tutorial - Complete Beginner Training", description: "", link: "https://www.udemy.com/certificate/UC-8d523be0-7fec-489f-8a25-d0ccfcb05197/", end_date: ~D[2023-02-12]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "DeepLearningAI", name: "Multi AI Agent systems with CrewAI", description: "", link: "", end_date: ~D[2025-07-10]})
+Repo.insert!(%Certification{profile_id: 1,issuer: "DeepLearningAI", name: "Practical Multi AI agents and advanced use cases with CrewAI", description: "", link: "", end_date: ~D[2025-08-04]})
 
 # Technology Categories
 Repo.insert!(%TechnologyCategory{name: "Databases"}) # 1
@@ -150,12 +150,12 @@ Repo.insert!(%ProfileTechnology{profile_id: 1, technology_id: 44, mastery: 4.0})
 
 
 # Social Networks
-Repo.insert!(%SocialNetwork{label: "LinkedIn", link: "https://www.linkedin.com/in/karolrojas07/", icon_link: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg"})
-Repo.insert!(%SocialNetwork{label: "GitHub", link: "https://github.com/karolrojas07/", icon_link: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"})
+Repo.insert!(%SocialNetwork{profile_id: 1, label: "LinkedIn", link: "https://www.linkedin.com/in/karolrojas07/", icon_link: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg"})
+Repo.insert!(%SocialNetwork{profile_id: 1, label: "GitHub", link: "https://github.com/karolrojas07/", icon_link: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"})
 
 # Profile Jobs
 
-Repo.insert!(%ProfileJob{company_name: "Asplabel", link: "https://www.asplabel.com", description: "Banana peeling plant that supports independent women and heads of household", start_date: ~D[2021-08-01], end_date: ~D[2021-12-20]})
+Repo.insert!(%ProfileJob{company_name: "Asplabel", link: "https://www.asplabel.com", description: "Banana peeling plant that supports independent women and heads of household", start_date: ~D[2021-08-01], end_date: ~D[2021-12-20], profile_id: 1})
 Repo.insert!(%Project{profile_job_id: 1, name: "DEVELOPMENT OF AN ACCESS CONTROL SYSTEM", link: "https://www.linkedin.com/posts/karolrojas07_electronica-desarrolloweb-sistemas-activity-6885365056779894784-8a24?utm_source=share&utm_medium=member_desktop&rcm=ACoAACynTXwBVAzoEBFHqgqQJ7NG9oXYzyW8c2A", description: "<ul><li>Assembled an access monitoring device using a micro-controller connected to WiFi and with RFID reader.</li><li>Built a web application for access control management using the MEAN stack (MongoDB, Express.js,Angular & NodeJS).</li></ul>"})
 Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 43})
 Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 44})
@@ -167,7 +167,7 @@ Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 39})
 Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 32})
 Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 33})
 
-Repo.insert!(%ProfileJob{company_name: "kommit", link: "https://www.kommit.co", description: "Incubator for Latin American talent for outsourcing", start_date: ~D[2022-02-01], end_date: ~D[2023-11-01]})
+Repo.insert!(%ProfileJob{company_name: "kommit", link: "https://www.kommit.co", description: "Incubator for Latin American talent for outsourcing", start_date: ~D[2022-02-01], end_date: ~D[2023-11-01], profile_id: 1})
 Repo.insert!(%Project{profile_job_id: 2, name: "REAL ESTATE PLATFORM", link: "https://www.engelvoelkers.com/co/en", description: "<ul><li>Maintained a 9-year-old Ruby on Rails app.</li><li>Enhanced reliability with Rspec tests.</li><li>Verified improvements via Quality Assurance.</li></ul>"})
 Repo.insert!(%ProjectTechnology{project_id: 2, technology_id: 32})
 Repo.insert!(%ProjectTechnology{project_id: 2, technology_id: 33})
@@ -218,7 +218,7 @@ Repo.insert!(%ProjectTechnology{project_id: 6, technology_id: 3})
 Repo.insert!(%ProjectTechnology{project_id: 6, technology_id: 7})
 Repo.insert!(%ProjectTechnology{project_id: 6, technology_id: 8})
 
-Repo.insert!(%ProfileJob{company_name: "Salient Process", link: "https://www.businesscompass.com", description: "Global leader in customer experience management", start_date: ~D[2023-12-13], end_date: ~D[2025-12-31]})
+Repo.insert!(%ProfileJob{company_name: "Salient Process", link: "https://www.businesscompass.com", description: "Global leader in customer experience management", start_date: ~D[2023-12-13], end_date: ~D[2025-12-31], profile_id: 1})
 Repo.insert!(%Project{profile_job_id: 3, name: "BUSINESS COMPASS", link: "https://www.businesscompass.com", description: "<ul><li>Implemented the First-Code Approach for handling Database schema changes and seeding.</li><li>Supported the design and implementation of a complex database schema that allows saving versions of different objects and relationships.</li><li>Developed several API Restful with ASP.NET 7</li><li>Developed responsive user interfaces that implemented design specifications and integrated seamlessly with backend API services</li><li>Developed stored functions, procedures, trigger functions, view tables and CTEs in PostgreSQL</li><li>Solved issues related with user sessions management based on OpenID Connect using Keycloak as Identity Provider.</li><li>Developed an automated programming solution for user’s access permission validation with ASP.NET.</li><li>Integrated and setup Stripe Payment Gateway.</li></ul>"})
 Repo.insert!(%ProjectTechnology{project_id: 7, technology_id: 1})
 Repo.insert!(%ProjectTechnology{project_id: 7, technology_id: 7})
@@ -244,7 +244,7 @@ Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 35})
 Repo.insert!(%ProjectTechnology{project_id: 1, technology_id: 41})
 
 
-Repo.insert!(%ProfileJob{company_name: "Freelance", link: "", description: "Independent software projects built by myself", start_date: ~D[2025-01-01], end_date: nil})
+Repo.insert!(%ProfileJob{company_name: "Freelance", link: "", description: "Independent software projects built by myself", start_date: ~D[2025-01-01], end_date: nil, profile_id: 1})
 Repo.insert!(%Project{profile_job_id: 4, name: "LANDING PAGE BUILT WITH NEXT.JS", link: "https://orquesta-m-de-la-buena.vercel.app", description: "<ul><li>Developed a whole website for a business using next.js and tailwind. With features like internationalization, emails delivery and contact through social networks.</li<li>CD using GitHub and Vercel.</li><li>Integrated Google Business reviews</li></ul>"})
 Repo.insert!(%ProjectTechnology{project_id: 9, technology_id: 32})
 Repo.insert!(%ProjectTechnology{project_id: 9, technology_id: 8})

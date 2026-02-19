@@ -24,7 +24,7 @@ alias SoftwarePortfolioGenerator.SocialNetworks.SocialNetwork
 alias SoftwarePortfolioGenerator.Certifications.Certification
 
 # Profiles
-Repo.insert!(%Profile{firstname: "Karol Liseth", lastname: "Rojas Bermudez", title: "Software Engineer - Senior Backend Developer", birthdate: ~D[2000-01-20] , email: "karol.rojasb@gmail.com", city: "Manizales", state: "Caldas", country: "Colombia", zipcode: "17002", phone_number: "+57 3155860681"})
+Repo.insert!(%Profile{firstname: "Karol Liseth", lastname: "Rojas Bermudez", title: "Software Engineer - Senior Full-Stack Developer", birthdate: ~D[2000-01-20] , email: "karol.rojasb@gmail.com", city: "Manizales", state: "Caldas", country: "Colombia", zipcode: "17002", phone_number: "+57 3155860681"})
 
 # Languages
 Repo.insert!(%Language{name: "English"})

@@ -17,8 +17,7 @@ defmodule SoftwarePortfolioGeneratorWeb.ProfileLive do
       <div class="content">
         <.live_component module={PersonalInformationComponent} id="personal_info" profile={@profile} />
         <p>Certifications: {@profile.certifications |> Enum.map(& &1.name) |> Enum.join(", ")}</p>
-        <p>Social Networks: {@profile.social_networks |> Enum.map(& &1.label) |> Enum.join(", ")}</p>
-        <%= for job <- @profile.profile_jobs do %>
+;        <%= for job <- @profile.profile_jobs do %>
           <div>
             <h2>{job.company_name}</h2>
             <p>{job.start_date} - {job.end_date}</p>
@@ -33,6 +32,7 @@ defmodule SoftwarePortfolioGeneratorWeb.ProfileLive do
         <% end %>
         <p>Languages: {@profile.profile_languages |> Enum.map(& &1.language.name) |> Enum.join(", ")}</p>
         <p>Technologies: {@profile.profile_technologies |> Enum.map(& "#{&1.technology.name} (#{&1.technology.category.name})") |> Enum.join(", ")}</p>
+        <.live_component module={SocialNetworksComponent} id="social_networks" profile={@profile} />
       </div>
     </div>
     """

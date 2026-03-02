@@ -16,8 +16,8 @@ defmodule SoftwarePortfolioGeneratorWeb.ProfileLive do
       </div>
       <div class="content">
         <.live_component module={PersonalInformationComponent} id="personal_info" profile={@profile} />
-        <p>Certifications: {@profile.certifications |> Enum.map(& &1.name) |> Enum.join(", ")}</p>
-;        <%= for job <- @profile.profile_jobs do %>
+        <.live_component module={CertificationsComponent} id="certifications" profile={@profile} />
+        <%= for job <- @profile.profile_jobs do %>
           <div>
             <h2>{job.company_name}</h2>
             <p>{job.start_date} - {job.end_date}</p>

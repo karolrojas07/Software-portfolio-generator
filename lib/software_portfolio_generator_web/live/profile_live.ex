@@ -9,15 +9,15 @@ defmodule SoftwarePortfolioGeneratorWeb.ProfileLive do
   def render(assigns) do
     ~H"""
     <Layouts.flash_group flash={@flash} />
-    <div class="flex flex-col items-center justify-center min-h-screen">
+    <div class="flex flex-col items-center justify-center min-h-screen px-12">
 
       <div class="absolute top-4 right-4">
         <Layouts.theme_toggle />
       </div>
-      <div class="content">
+      <div class="contents">
         <.live_component module={PersonalInformationComponent} id="personal_info" profile={@profile} />
-        <p>Certifications: {@profile.certifications |> Enum.map(& &1.name) |> Enum.join(", ")}</p>
-;        <%= for job <- @profile.profile_jobs do %>
+        <.live_component module={CertificationsComponent} id="certifications" profile={@profile} />
+        <%= for job <- @profile.profile_jobs do %>
           <div>
             <h2>{job.company_name}</h2>
             <p>{job.start_date} - {job.end_date}</p>

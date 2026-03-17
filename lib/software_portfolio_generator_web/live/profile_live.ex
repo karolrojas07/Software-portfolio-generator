@@ -17,21 +17,11 @@ defmodule SoftwarePortfolioGeneratorWeb.ProfileLive do
       <div class="contents">
         <.live_component module={PersonalInformationComponent} id="personal_info" profile={@profile} />
         <.live_component module={CertificationsComponent} id="certifications" profile={@profile} />
-        <%= for job <- @profile.profile_jobs do %>
-          <div>
-            <h2>{job.company_name}</h2>
-            <p>{job.start_date} - {job.end_date}</p>
-            <%= for project <- job.projects do %>
-              <div>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <p>Technologies: {project.project_technologies |> Enum.map(& "#{&1.technology.name} (#{&1.technology.category.name})") |> Enum.join(", ")}</p>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        <p>Languages: {@profile.profile_languages |> Enum.map(& &1.language.name) |> Enum.join(", ")}</p>
-        <p>Technologies: {@profile.profile_technologies |> Enum.map(& "#{&1.technology.name} (#{&1.technology.category.name})") |> Enum.join(", ")}</p>
+        <.live_component
+          module={WorkExperienceComponent}
+          id="work-experience"
+          jobs={@profile.profile_jobs}
+        />
         <.live_component module={SocialNetworksComponent} id="social_networks" profile={@profile} />
       </div>
     </div>

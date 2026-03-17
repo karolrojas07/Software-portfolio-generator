@@ -33,6 +33,10 @@ defmodule PersonalInformationComponent do
                 <dd>{safe(@profile.country)}</dd>
               </div>
               <div class="sm:col-span-2">
+                <dt class="font-semibold">Languages</dt>
+                <dd>{safe(@profile.profile_languages |> Enum.map(& &1.language.name) |> Enum.join(", "))}</dd>
+              </div>
+              <div class="sm:col-span-2">
                 <dt class="font-semibold">Phone</dt>
                 <dd>{safe(@profile.phone_number)}</dd>
               </div>

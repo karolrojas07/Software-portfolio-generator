@@ -11,7 +11,7 @@ defmodule PersonalInformationComponent do
           <span class="text-xs font-semibold tracking-[3px] text-slate-400 uppercase">
             LOOKING FOR
           </span>
-          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-bold text-slate-900 dark:text-slate-100 leading-tight">
+          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-bold text-orange-500 dark:text-violet-400 leading-tight">
             {safe(@profile.title)}
           </h1>
           <p class="text-lg text-slate-400">Let's get acquainted.</p>

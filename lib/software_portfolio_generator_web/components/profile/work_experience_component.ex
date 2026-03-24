@@ -8,7 +8,7 @@ defmodule WorkExperienceComponent do
       <div class="flex flex-col gap-10 max-w-7xl mx-auto px-6 sm:px-8 my-12">
         <%!-- Section heading --%>
         <div class="flex flex-col gap-2.5">
-          <h2 class="text-[38px] font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+          <h2 class="text-[38px] font-bold text-orange-500 dark:text-violet-400 tracking-tight">
             Work Experience
           </h2>
           <div class="w-14 h-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
@@ -150,21 +150,21 @@ defmodule WorkExperienceComponent do
                         <div class="flex flex-wrap gap-2">
                           <%= for pt <- project.project_technologies do %>
                             <% tech = pt.technology %>
-                            <span class="inline-flex items-center gap-1.5 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 dark:text-indigo-400 rounded-md px-2.5 py-1 text-xs">
+                            <span class="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 dark:text-indigo-400 rounded-md px-3 py-1.5 text-sm">
                               <%= if tech.icon_link do %>
-                                <img src={tech.icon_link} class="w-3.5 h-3.5" alt={tech.name} />
+                                <img src={tech.icon_link} class="w-5 h-5" alt={tech.name} />
                               <% end %>
                               {tech.name}
                             </span>
                           <% end %>
                         </div>
 
-                        <%= if project.link do %>
+                        <%= if project.link != nil and project.link != "" do %>
                           <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1 text-xs font-medium text-indigo-500 hover:text-indigo-600 transition-colors w-fit"
+                            class="inline-flex items-center gap-1 mt-4 text-xs font-medium text-indigo-500 hover:text-indigo-600 transition-colors w-fit"
                           >
                             View Project →
                           </a>

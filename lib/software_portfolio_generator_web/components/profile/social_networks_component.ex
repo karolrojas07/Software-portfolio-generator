@@ -20,7 +20,7 @@ defmodule SocialNetworksComponent do
               href={sn.link}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 bg-slate-50 dark:bg-[#0D1117] rounded-xl border border-slate-200 dark:border-slate-800 py-3.5 px-6 hover:scale-105 transition-transform"
+              class="flex items-center gap-2.5 bg-slate-50 dark:bg-[#161B27] rounded-xl border border-slate-200 dark:border-slate-800 py-3.5 px-6 hover:scale-105 transition-transform"
             >
               <img src={sn.icon_link} alt={sn.label} class="w-5 h-5" />
               <span class="text-[15px] font-medium text-slate-700 dark:text-slate-300">

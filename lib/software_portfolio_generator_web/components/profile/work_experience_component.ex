@@ -4,8 +4,8 @@ defmodule WorkExperienceComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <section class="w-full bg-slate-50 dark:bg-[#0D1117] py-20 px-6 sm:px-20">
-      <div class="flex flex-col gap-10">
+    <section class="w-full bg-slate-50 dark:bg-[#0D1117] py-20 my-12">
+      <div class="flex flex-col gap-10 max-w-7xl mx-auto px-6 sm:px-8 my-12">
         <%!-- Section heading --%>
         <div class="flex flex-col gap-2.5">
           <h2 class="text-[38px] font-bold text-slate-900 dark:text-slate-100 tracking-tight">

@@ -3,8 +3,8 @@ defmodule CertificationsComponent do
 
   def render(assigns) do
     ~H"""
-    <section class="w-full bg-white dark:bg-[#161B27] py-20 px-6 sm:px-20">
-      <div class="flex flex-col items-center gap-12">
+    <section class="w-full bg-white dark:bg-[#161B27] py-20 my-12">
+      <div class="flex flex-col items-center gap-12 max-w-7xl mx-auto px-6 sm:px-8">
         <div class="flex flex-col items-center gap-3">
           <h2 class="text-[38px] font-bold text-slate-900 dark:text-slate-100">Certifications</h2>
           <div class="w-14 h-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>

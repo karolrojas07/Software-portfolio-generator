@@ -3,10 +3,10 @@ defmodule PersonalInformationComponent do
 
   def render(assigns) do
     ~H"""
-    <section class="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0D1117]">
+    <section class="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0D1117] mb-12">
       <div class="h-16"></div>
 
-      <div class="flex-1 flex flex-col items-center justify-center px-6 sm:px-16 pb-20 gap-12">
+      <div class="flex-1 flex flex-col items-center justify-center px-6 sm:px-8 pb-20 gap-12 max-w-7xl mx-auto w-full">
         <div class="flex flex-col items-center gap-2.5 text-center">
           <span class="text-xs font-semibold tracking-[3px] text-slate-400 uppercase">
             LOOKING FOR

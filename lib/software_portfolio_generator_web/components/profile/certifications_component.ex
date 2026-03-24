@@ -3,42 +3,65 @@ defmodule CertificationsComponent do
 
   def render(assigns) do
     ~H"""
-    <div class="w-full my-4">
-      <h2 class="text-center text-4xl font-bold mb-4">Certifications</h2>
+    <section class="w-full bg-white dark:bg-[#161B27] py-20 my-12">
+      <div class="flex flex-col items-center gap-12 max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="flex flex-col items-center gap-3">
+          <h2 class="text-[38px] font-bold text-orange-500 dark:text-violet-400">Certifications</h2>
+          <div class="w-14 h-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+        </div>
 
-      <%= if Enum.empty?(@profile.certifications) do %>
-        <p class="text-center text-gray-600 my-4">No certifications listed.</p>
-      <% else %>
-        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 p-0 m-0 list-none">
-          <%= for cert <- @profile.certifications do %>
-            <li class="w-full gap-4 bg-white/50 p-4 rounded-lg border border-gray-100">
-              <div class="flex w-full">
-                <div class="min-w-0 w-4/5">
-                  <span class="block  font-medium text-gray-900">{cert.name}</span>
-                  <span class="text-sm text-gray-500">{cert.issuer} · {format_date(cert.end_date)}</span>
-
-                  <p class="mt-2 text-gray-700 text-sm">{cert.description}</p>
-                </div>
-                <%= if String.length(cert.link) > 0 do %>
-                  <div class="flex w-1/5 items-center justify-center">
-                    <a class="w-6 h-6 hover:text-blue-500 hover:font-bold" href={cert.link} target="_blank" rel="noopener noreferrer">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        <%= if Enum.empty?(@profile.certifications) do %>
+          <p class="text-center text-slate-500 dark:text-slate-400">No certifications listed.</p>
+        <% else %>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+            <%= for cert <- @profile.certifications do %>
+              <div class="bg-white dark:bg-[#161B27] rounded-xl border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-3">
+                <div class="flex justify-between items-start">
+                  <span class="text-[15px] font-semibold text-slate-900 dark:text-slate-100">
+                    {cert.name}
+                  </span>
+                  <%= if cert.link != "" do %>
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-slate-400 hover:text-indigo-500 transition-colors shrink-0 ml-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
                       </svg>
                     </a>
-                  </div>
-                <% end %>
+                  <% end %>
+                </div>
+                <span class="text-[13px] text-slate-400">
+                  {cert.issuer} · {format_date(cert.end_date)}
+                </span>
+                <p class="text-[13px] text-slate-600 dark:text-slate-400">{cert.description}</p>
               </div>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </section>
     """
   end
 
   defp format_date(nil), do: ""
+
   defp format_date(date) do
-    "#{date.month}/#{date.day}/#{date.year}"
+    month = date.month |> Integer.to_string() |> String.pad_leading(2, "0")
+    "#{month}/#{date.year}"
   end
 end

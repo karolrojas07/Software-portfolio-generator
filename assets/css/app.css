@@ -100,7 +100,10 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* Make LiveView wrapper divs transparent for layout */
-[data-phx-session], [data-phx-teleported-src] { display: contents }
+[data-phx-session], [data-phx-teleported-src], [data-phx-component] { display: contents }
+/* Clean details/summary markers */
+summary::-webkit-details-marker { display: contents; }
+summary { list-style: none; }
 
 /* This file is for your main application CSS */
 /* Keyframe animations */

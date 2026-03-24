@@ -4,31 +4,28 @@ defmodule WorkExperienceComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <section class="py-20 w-full">
-      <div class="mx-auto px-6">
-
-        <div class="mb-8">
-          <h2 class="text-4xl font-bold text-slate-900 tracking-tight">
+    <section class="w-full bg-slate-50 dark:bg-[#0D1117] py-20 my-12">
+      <div class="flex flex-col gap-10 max-w-7xl mx-auto px-6 sm:px-8 my-12">
+        <%!-- Section heading --%>
+        <div class="flex flex-col gap-2.5">
+          <h2 class="text-[38px] font-bold text-orange-500 dark:text-violet-400 tracking-tight">
             Work Experience
           </h2>
-          <div class="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mt-3 mb-3" />
-          <p class="text-slate-500 text-base">
+          <div class="w-14 h-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+          <p class="text-[15px] text-slate-500 dark:text-slate-400">
             Filter by technology to explore relevant experience
           </p>
         </div>
 
-        <!-- FILTERS -->
-        <div class="backdrop-blur-sm rounded-2xl p-4 border border-slate-100 shadow-sm mb-8 h-full">
-          <p class="text-xs uppercase tracking-wider text-slate-400 font-medium my-4">
-            Filter by stack
-          </p>
-          <!-- Categories -->
-          <div class="flex flex-wrap gap-2 my-4">
+        <%!-- Filter panel --%>
+        <div class="bg-white dark:bg-[#161B27] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-[0_2px_8px_rgba(15,23,42,0.03)] py-4 px-5 flex flex-col gap-3">
+          <%!-- Category row --%>
+          <div class="flex flex-wrap items-center gap-2">
             <button
               phx-click="select_category"
               phx-value-id="all"
               phx-target={@myself}
-              class={"rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 #{if is_nil(@selected_category), do: "bg-slate-900 text-white", else: "bg-white text-slate-600 border border-slate-200 hover:border-slate-400"}"}
+              class={"rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200 cursor-pointer #{if is_nil(@selected_category), do: "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900", else: "bg-white text-slate-600 border border-slate-200 hover:border-slate-400 dark:bg-transparent dark:text-slate-400 dark:border-slate-700"}"}
             >
               All
             </button>
@@ -38,20 +35,20 @@ defmodule WorkExperienceComponent do
                 phx-click="select_category"
                 phx-value-id={cat.id}
                 phx-target={@myself}
-                class={"rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 #{if @selected_category == cat.id, do: "bg-slate-900 text-white", else: "bg-white text-slate-600 border border-slate-200 hover:border-slate-400"}"}
+                class={"rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200 cursor-pointer #{if @selected_category == cat.id, do: "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900", else: "bg-white text-slate-600 border border-slate-200 hover:border-slate-400 dark:bg-transparent dark:text-slate-400 dark:border-slate-700"}"}
               >
-                <%= cat.name %>
+                {cat.name}
               </button>
             <% end %>
           </div>
 
-          <!-- Technologies -->
-          <div class="flex flex-wrap gap-2">
+          <%!-- Technology row --%>
+          <div class="flex flex-wrap items-center gap-1.5">
             <button
               phx-click="select_tech"
               phx-value-id="all"
               phx-target={@myself}
-              class={"rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 #{if is_nil(@selected_tech), do: "bg-slate-900 text-white", else: "bg-white text-slate-600 border border-slate-200 hover:border-slate-400"}"}
+              class={"rounded-full px-3 py-1 text-xs transition-all duration-200 cursor-pointer #{if is_nil(@selected_tech), do: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400", else: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400"}"}
             >
               All Technologies
             </button>
@@ -61,94 +58,125 @@ defmodule WorkExperienceComponent do
                 phx-click="select_tech"
                 phx-value-id={tech.id}
                 phx-target={@myself}
-                class={"inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium
-        border transition-all duration-200 cursor-pointer hover:scale-105 #{if @selected_tech == tech.id, do: "bg-indigo-500 text-white border-indigo-500", else: "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100"}"}
+                class={"rounded-full px-3 py-1 text-xs transition-all duration-200 cursor-pointer #{if @selected_tech == tech.id, do: "bg-indigo-500 text-white font-medium", else: "bg-indigo-50 text-indigo-500 dark:bg-indigo-500/10 dark:text-indigo-400"}"}
               >
-                <%= tech.name %>
+                {tech.name}
               </button>
             <% end %>
           </div>
         </div>
 
-        <!-- JOBS -->
-        <div class="space-y-10">
-          <%= for job <- @filtered_jobs do %>
-            <div class="card bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300
-        border border-slate-100 border-l-4 overflow-hidden animate-fade-in-up">
-              <div class="card-body">
-
-                <div class="flex justify-between items-start">
-                  <div>
-                    <h3 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
-                      <%= job.company_name %>
-                    </h3>
-                    <div class="flex items-center gap-2 bg-slate-50 text-slate-500 rounded-full px-3 py-1 text-xs font-mono shrink-0">
-                      <%= job.start_date %> —
-                      <%= job.end_date || "Present" %>
-                    </div>
-                  </div>
-
-                  <%= if job.link do %>
-                    <a
-                      href={job.link}
-                      target="_blank"
-                      class="btn btn-sm bg-white text-slate-600 border border-slate-200 hover:border-slate-400"
-                    >
-                      Visit
-                    </a>
-                  <% end %>
+        <%!-- Jobs list --%>
+        <div class="flex flex-col gap-6">
+          <%= for {job, idx} <- Enum.with_index(@filtered_jobs) do %>
+            <div class={"bg-white dark:bg-[#161B27] rounded-2xl shadow-[0_4px_20px_rgba(15,23,42,0.04)] border-l-4 p-5 sm:p-7 flex flex-col gap-5 animate-fade-in-up #{if rem(idx, 2) == 0, do: "border-l-indigo-500 dark:border-l-indigo-400", else: "border-l-purple-500 dark:border-l-purple-400"}"}>
+              <%!-- Job header --%>
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+                <div class="flex flex-col gap-1.5">
+                  <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                    {job.company_name}
+                  </h3>
+                  <span class="inline-flex w-fit bg-slate-100 dark:bg-slate-800 rounded-full px-3 py-1 text-xs font-mono text-slate-500 dark:text-slate-400">
+                    {format_job_date(job.start_date)} — {format_job_date(job.end_date)}
+                  </span>
                 </div>
 
-                <p class="mt-4 opacity-80">
-                  <%= job.description %>
-                </p>
+                <%= if job.link do %>
+                  <a
+                    href={job.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 dark:bg-[#0D1117] border border-slate-200 dark:border-slate-800 px-3.5 py-2 text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:border-slate-400 transition-colors w-fit"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    Visit
+                  </a>
+                <% end %>
+              </div>
 
-                <!-- Projects -->
-                <div class="mt-6 space-y-4">
+              <%!-- Job description --%>
+              <p class="text-sm text-slate-500 dark:text-slate-400">
+                {job.description}
+              </p>
+
+              <%!-- Projects --%>
+              <%= if job.projects != [] do %>
+                <span class="text-[10px] font-semibold tracking-[2px] text-slate-400 uppercase">
+                  PROJECTS
+                </span>
+
+                <div class="flex flex-col gap-3">
                   <%= for project <- job.projects do %>
-                    <div class="collapse collapse-arrow bg-base-200 mt-4 animate-fade-in">
-                      <input type="checkbox" />
+                    <details class="group bg-slate-50 dark:bg-[#0D1117] rounded-[10px] border border-slate-100 dark:border-slate-800 overflow-hidden">
+                      <summary class="flex justify-between items-center cursor-pointer p-4">
+                        <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                          {project.name}
+                        </span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="text-slate-400 shrink-0 transition-transform duration-200 group-open:rotate-90"
+                        >
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </summary>
 
-                      <div class="collapse-title font-semibold">
-                        <%= project.name %>
-                      </div>
-
-                      <div class="collapse-content space-y-4">
-
-                        <p><%= Phoenix.HTML.raw(project.description) %></p>
+                      <div class="px-4 pb-4 flex flex-col gap-2.5 animate-fade-in">
+                        <p class="text-[13px] text-slate-500 dark:text-slate-400">
+                          {Phoenix.HTML.raw(project.description)}
+                        </p>
 
                         <div class="flex flex-wrap gap-2">
-                          <%= for tech <- project.project_technologies do %>
-                            <% tech = tech.technology %>
-                            <span class="badge badge-outline gap-2">
+                          <%= for pt <- project.project_technologies do %>
+                            <% tech = pt.technology %>
+                            <span class="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 dark:text-indigo-400 rounded-md px-3 py-1.5 text-sm">
                               <%= if tech.icon_link do %>
-                                <img src={tech.icon_link} class="w-4 h-4" />
+                                <img src={tech.icon_link} class="w-5 h-5" alt={tech.name} />
                               <% end %>
-                              <%= tech.name %>
+                              {tech.name}
                             </span>
                           <% end %>
                         </div>
 
-                        <%= if project.link do %>
+                        <%= if project.link != nil and project.link != "" do %>
                           <a
                             href={project.link}
                             target="_blank"
-                            class="btn btn-xs btn-primary"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1 mt-4 text-xs font-medium text-indigo-500 hover:text-indigo-600 transition-colors w-fit"
                           >
-                            View Project
+                            View Project →
                           </a>
                         <% end %>
-
                       </div>
-                    </div>
+                    </details>
                   <% end %>
                 </div>
-
-              </div>
+              <% end %>
             </div>
           <% end %>
         </div>
-
       </div>
     </section>
     """
@@ -160,6 +188,13 @@ defmodule WorkExperienceComponent do
     Enum.filter(technologies, fn tech ->
       tech.category.id == category_id
     end)
+  end
+
+  defp format_job_date(nil), do: "Present"
+
+  defp format_job_date(date) do
+    months = ~w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+    "#{Enum.at(months, date.month - 1)} #{date.year}"
   end
 
   @impl true

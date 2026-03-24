@@ -3,61 +3,76 @@ defmodule PersonalInformationComponent do
 
   def render(assigns) do
     ~H"""
-    <div>
+    <section class="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0D1117] mb-12">
+      <div class="h-16"></div>
 
-      <section class="min-h-screen flex items-center justify-center px-6 dark:bg-gray-800 ">
-        <div class="max-w-4xl w-full">
-          <div class="text-center mb-8">
-            <div class="text-2xl font-semibold">Looking for</div>
-            <h1 class="text-5xl font-bold mt-2">{safe(@profile.title)}</h1>
-            <p class="text-lg text-muted mt-4">Let's get acquainted.</p>
-          </div>
+      <div class="flex-1 flex flex-col items-center justify-center px-6 sm:px-8 pb-20 gap-12 max-w-7xl mx-auto w-full">
+        <div class="flex flex-col items-center gap-2.5 text-center">
+          <span class="text-xs font-semibold tracking-[3px] text-slate-400 uppercase">
+            LOOKING FOR
+          </span>
+          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-bold text-orange-500 dark:text-violet-400 leading-tight">
+            {safe(@profile.title)}
+          </h1>
+          <p class="text-lg text-slate-400">Let's get acquainted.</p>
+        </div>
 
-          <div class="dark:bg-gray-500  bg-gray-200 p-6 rounded-lg shadow-sm">
-            <h2 class="text-center text-2xl font-bold mb-4">Hello There! — I'm {safe(@profile.firstname)} {safe(@profile.lastname)}</h2>
-            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
-              <div>
-                <dt class="font-semibold">Age</dt>
-                <dd>{calculate_age(@profile.birthdate)}</dd>
-              </div>
-              <div>
-                <dt class="font-semibold">Email</dt>
-                <dd>{safe(@profile.email)}</dd>
-              </div>
-              <div>
-                <dt class="font-semibold">Location</dt>
-                <dd>{safe(@profile.city)}, {safe(@profile.state)} {safe(@profile.zipcode)}</dd>
-              </div>
-              <div>
-                <dt class="font-semibold">Country</dt>
-                <dd>{safe(@profile.country)}</dd>
-              </div>
-              <div class="sm:col-span-2">
-                <dt class="font-semibold">Languages</dt>
-                <dd>{safe(@profile.profile_languages |> Enum.map(& &1.language.name) |> Enum.join(", "))}</dd>
-              </div>
-              <div class="sm:col-span-2">
-                <dt class="font-semibold">Phone</dt>
-                <dd>{safe(@profile.phone_number)}</dd>
-              </div>
-            </dl>
+        <div class="w-full max-w-[760px] bg-white dark:bg-[#161B27] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-[0_8px_40px_rgba(15,23,42,0.08)] p-6 sm:p-9 flex flex-col gap-6">
+          <h2 class="text-xl sm:text-[22px] font-semibold text-slate-900 dark:text-slate-100">
+            Hello There! — I'm {safe(@profile.firstname)} {safe(@profile.lastname)}
+          </h2>
+
+          <div class="flex flex-col sm:flex-row gap-8">
+            <div class="flex-1 flex flex-col gap-4">
+              <.info_row label="AGE" value={format_age(@profile.birthdate)} />
+              <.info_row label="EMAIL" value={safe(@profile.email)} />
+              <.info_row
+                label="LOCATION"
+                value={"#{safe(@profile.city)}, #{safe(@profile.state)} #{safe(@profile.zipcode)}"}
+              />
+            </div>
+            <div class="flex-1 flex flex-col gap-4">
+              <.info_row label="COUNTRY" value={safe(@profile.country)} />
+              <.info_row
+                label="LANGUAGES"
+                value={
+                  safe(
+                    @profile.profile_languages
+                    |> Enum.map(& &1.language.name)
+                    |> Enum.join(", ")
+                  )
+                }
+              />
+              <.info_row label="PHONE" value={safe(@profile.phone_number)} />
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+    """
+  end
+
+  defp info_row(assigns) do
+    ~H"""
+    <div class="flex flex-col gap-[3px]">
+      <span class="text-[10px] font-semibold tracking-[2px] text-slate-400">{@label}</span>
+      <span class="text-sm text-slate-700 dark:text-slate-300">{@value}</span>
     </div>
     """
   end
 
-  defp calculate_age(nil), do: ""
-  defp calculate_age(date) do
+  defp format_age(nil), do: ""
+
+  defp format_age(date) do
     now = Date.utc_today()
     age = now.year - date.year
 
-    if now.month < date.month || (now.month == date.month && now.day < date.day) do
-      age - 1
-    else
-      age
-    end
+    age =
+      if now.month < date.month || (now.month == date.month && now.day < date.day),
+        do: age - 1,
+        else: age
+
+    "#{age} years old"
   end
 
   defp safe(nil), do: ""

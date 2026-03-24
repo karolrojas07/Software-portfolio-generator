@@ -4,7 +4,7 @@ import Config
 if config_env() in [:dev, :test] do
   if Code.ensure_loaded?(Dotenvy) do
     import Dotenvy
-    source!([Path.expand(".env", __DIR__), System.get_env()])
+    source!([Path.expand("../.env", __DIR__), System.get_env()], side_effect: &System.put_env/1)
   end
 
   # Override database configuration with values from .env file

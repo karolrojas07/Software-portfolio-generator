@@ -1,10 +1,5 @@
 import Config
 
-# Load .env file for compile-time configuration
-# Use require_file to ensure the module is loaded
-Code.require_file("helpers.exs", __DIR__)
-ConfigHelpers.load_env_file(Path.expand(".env", Path.dirname(__DIR__)))
-
 # Configure your database
 config :software_portfolio_generator, SoftwarePortfolioGenerator.Repo,
   username: System.get_env("DB_USERNAME", "postgres"),

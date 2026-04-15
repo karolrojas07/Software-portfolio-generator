@@ -1,0 +1,31 @@
+app = "software-portfolio-karol"
+primary_region = "iad"
+
+[build]
+
+[env]
+  PHX_SERVER = "true"
+  PORT = "8080"
+  DEFAULT_PROFILE_ID = "1"
+  ECTO_IPV6 = "true"
+
+[deploy]
+  release_command = "/app/bin/software_portfolio_generator eval \"SoftwarePortfolioGenerator.Release.migrate\""
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [[services.http_checks]]
+    path = "/"
+    interval = "10s"
+    timeout = "5s"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443

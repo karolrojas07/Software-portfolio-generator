@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Mix
+_build/
+deps/
+.elixir_ls/
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Compiled assets (will be rebuilt)
+priv/static/
+
+# Test
+test/
+
+# Misc
+.dockerignore
+Dockerfile
+README.md
+CHANGELOG.md

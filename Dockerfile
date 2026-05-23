@@ -49,7 +49,16 @@ FROM debian:bookworm
 # Install runtime dependencies
 RUN apt-get update -qq && \
     apt-get install -y ca-certificates inotify-tools && \
+    # Ensure LANG is UTF-8 to avoid Elixir locale warnings at runtime
+    apt-get install -y locales && \
+    sed -i '/C.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen C.UTF-8 && \
+    update-locale LANG=C.UTF-8 LC_ALL=C.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
+
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV ELIXIR_ERL_OPTIONS="+fnu"
 
 WORKDIR /app
 

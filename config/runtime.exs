@@ -3,8 +3,10 @@ import Config
 # Load .env file in development and test environments
 if config_env() in [:dev, :test] do
   if Code.ensure_loaded?(Dotenvy) do
-    import Dotenvy
-    source!([Path.expand("../.env", __DIR__), System.get_env()], side_effect: &System.put_env/1)
+    # Avoid `import Dotenvy` which is a compile-time operation and can
+    # cause release compilation to fail when Dotenvy is not available.
+    # Call the function directly at runtime only when the module is loaded.
+    Dotenvy.source!([Path.expand("../.env", __DIR__), System.get_env()], side_effect: &System.put_env/1)
   end
 
   # Override database configuration with values from .env file

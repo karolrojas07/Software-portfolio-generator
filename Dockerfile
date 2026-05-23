@@ -1,20 +1,22 @@
 # syntax=docker/dockerfile:1
 
-# Elixir 1.15 builder
+# Elixir 1.15 builder (use official Elixir image tag)
 ARG ELIXIR_VERSION=1.15.7
-ARG OTP_VERSION=26.2.1
-ARG DEBIAN_VERSION=bookworm
+FROM elixir:${ELIXIR_VERSION} AS builder
 
-FROM hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION} AS builder
-
-# Install Node.js for esbuild and Tailwind CSS
+# Install Node.js for esbuild and Tailwind CSS and required tooling
 ARG NODE_VERSION=20
-RUN apt-get update -qq && apt-get install -y -qq curl && \
+# Install `inotify-tools` so `:file_system` can find `inotifywait` during build
+RUN apt-get update -qq && apt-get install -y -qq curl inotify-tools && \
     curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
     apt-get install -y -qq nodejs && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+
+# Build environment
+ENV MIX_ENV=prod
+ENV NODE_ENV=production
 
 # Install Hex and Rebar
 RUN mix local.hex --force && \
@@ -28,20 +30,21 @@ COPY priv priv
 COPY assets assets
 COPY rel rel
 
-# Install dependencies
+# Install dependencies (prod only)
 RUN mix deps.get --only prod
+RUN mix deps.compile
 
-# Compile assets
-RUN mix assets.deploy
-
-# Compile application
+# Compile application (generates colocated JS used by assets)
 RUN mix compile
+
+# Compile assets (after compile so colocated JS exists)
+RUN mix assets.deploy
 
 # Build release
 RUN mix release
 
 # Final runtime image
-FROM debian:${DEBIAN_VERSION}
+FROM debian:bookworm
 
 # Install runtime dependencies
 RUN apt-get update -qq && \

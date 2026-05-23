@@ -12,7 +12,7 @@ jobs:
       - name: Install flyctl
         run: |
           curl -L https://fly.io/install.sh | sh
-          echo "::add-path::$HOME/.fly/bin"
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
       - name: Deploy to Fly.io
         run: |
           $HOME/.fly/bin/flyctl version

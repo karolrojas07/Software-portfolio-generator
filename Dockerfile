@@ -48,7 +48,7 @@ FROM debian:bookworm
 
 # Install runtime dependencies
 RUN apt-get update -qq && \
-    apt-get install -y ca-certificates && \
+    apt-get install -y ca-certificates inotify-tools && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

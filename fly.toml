@@ -1,4 +1,4 @@
-app = "software-portfolio-karol"
+app = "software-portfolio-generator"
 primary_region = "iad"
 
 [build]

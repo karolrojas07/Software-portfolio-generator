@@ -20,6 +20,8 @@ primary_region = "iad"
     path = "/"
     interval = "10s"
     timeout = "5s"
+    # Give the app more time to boot before failing health checks
+    grace_period = "60s"
 
   [[services.ports]]
     handlers = ["http"]

@@ -8,6 +8,7 @@ primary_region = "iad"
   PORT = "8080"
   DEFAULT_PROFILE_ID = "1"
   ECTO_IPV6 = "true"
+  PHX_HOST = "software-portfolio-generator.fly.dev"
 
 [deploy]
   release_command = "/app/bin/software_portfolio_generator eval \"SoftwarePortfolioGenerator.Release.migrate\""

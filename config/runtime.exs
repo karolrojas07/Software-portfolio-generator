@@ -55,13 +55,16 @@ if config_env() == :prod do
     # ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    # Force SSL for production database connections. Many hosted Postgres
-    # providers (Neon, Heroku, etc.) require TLS. If your DATABASE_URL
-    # already contains `sslmode=require` this is redundant but ensures
-    # Postgrex will negotiate TLS. For stricter verification, replace
-    # `verify: :verify_none` with proper CA verification.
-    ssl: true,
-    ssl_opts: [verify: :verify_none],
+    # Configure SSL for hosted Postgres providers. The `:ssl_opts` key is
+    # deprecated; pass options directly via the `:ssl` key so Postgrex/Erlang
+    # ssl receives the proper options. For quick startups we disable
+    # certificate verification, but you should verify certificates in
+    # production by providing a CA cert and using `:verify_peer`.
+    ssl: [verify: :verify_none],
+    # DB connection queue tuning. If your DB is slow to respond during
+    # migrations or heavy load, increase these values via env vars.
+    queue_target: String.to_integer(System.get_env("DB_QUEUE_TARGET") || "10000"),
+    queue_interval: String.to_integer(System.get_env("DB_QUEUE_INTERVAL") || "2000"),
     # For machines with several cores, consider starting multiple pools of `pool_size`
     # pool_count: 4,
     socket_options: maybe_ipv6

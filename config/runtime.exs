@@ -92,10 +92,10 @@ if config_env() == :prod do
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Bind to all IPv4 interfaces so Fly's proxy can reach the app on
-      # 0.0.0.0:PORT (Fly expects 0.0.0.0:8080 by default). Use the
-      # `PORT` environment variable supplied by the platform (default 8080).
+      # 0.0.0.0:PORT (Fly expects 0.0.0.0:4369 by default). Use the
+      # `PORT` environment variable supplied by the platform (default 4369).
       ip: {0, 0, 0, 0},
-      port: String.to_integer(System.get_env("PORT", "8080"))
+      port: String.to_integer(System.get_env("PORT", "4369"))
     ],
     secret_key_base: secret_key_base,
     server: true

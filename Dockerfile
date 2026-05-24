@@ -73,7 +73,7 @@ USER app
 HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 \
     CMD /app/bin/software_portfolio_generator eval "IO.puts('ok')"
 
-EXPOSE 8080
+EXPOSE 4369
 # Run the release in the foreground so the container process stays alive
 # and Fly health checks can reach the HTTP server.
 CMD ["/app/bin/server"]

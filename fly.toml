@@ -5,7 +5,7 @@ primary_region = "iad"
 
 [env]
   PHX_SERVER = "true"
-  PORT = "8080"
+  PORT = "4369"
   DEFAULT_PROFILE_ID = "1"
   ECTO_IPV6 = "true"
   PHX_HOST = "software-portfolio-generator.fly.dev"
@@ -15,8 +15,8 @@ primary_region = "iad"
 
 [[services]]
   protocol = "tcp"
-  internal_port = 8080
-  processes = [“app”]
+  internal_port = 4369
+  processes = ["app"]
 
   [[services.http_checks]]
     path = "/"
@@ -28,7 +28,7 @@ primary_region = "iad"
   # Also add a TCP check to verify the BEAM VM is listening on the internal port
   # This avoids false negatives when HTTP checks receive redirects (e.g., Plug.SSL).
   [[services.tcp_checks]]
-    port = 8080
+    port = 4369
     interval = "10s"
     timeout = "5s"
     grace_period = "60s"

@@ -24,6 +24,14 @@ primary_region = "iad"
     # Give the app more time to boot before failing health checks
     grace_period = "60s"
 
+  # Also add a TCP check to verify the BEAM VM is listening on the internal port
+  # This avoids false negatives when HTTP checks receive redirects (e.g., Plug.SSL).
+  [[services.tcp_checks]]
+    port = 8080
+    interval = "10s"
+    timeout = "5s"
+    grace_period = "60s"
+
   [[services.ports]]
     handlers = ["http"]
     port = 80

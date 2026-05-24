@@ -9,7 +9,7 @@ ARG NODE_VERSION=20
 # Install `inotify-tools` so `:file_system` can find `inotifywait` during build
 RUN apt-get update -qq && apt-get install -y -qq curl inotify-tools && \
     curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
-    apt-get install -y -qq nodejs && \
+    apt-get install -y -qq nodejs iproute2 net-tools && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

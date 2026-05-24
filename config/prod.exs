@@ -11,7 +11,11 @@ config :software_portfolio_generator, SoftwarePortfolioGeneratorWeb.Endpoint,
 # Force using SSL in production. This also sets the "strict-security-transport" header,
 # also known as HSTS. `:force_ssl` is required to be set at compile-time.
 config :software_portfolio_generator, SoftwarePortfolioGeneratorWeb.Endpoint,
-  force_ssl: [rewrite_on: [:x_forwarded_proto]]
+  force_ssl: [
+    rewrite_on: [:x_forwarded_proto],
+    # 👇 This prevents Plug.SSL from redirecting Fly's internal health checks
+    host_matching: [except: [~r/.*\.internal$/]]
+  ]
 
 # Configure Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Req

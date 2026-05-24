@@ -81,7 +81,10 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  # Prefer an explicit `PHX_HOST` if provided (set this to your app domain).
+  # Fall back to the Fly app name (if available) or localhost to avoid the
+  # default `example.com` redirect which breaks health checks.
+  host = System.get_env("PHX_HOST") || System.get_env("FLY_APP_NAME") || "localhost"
 
   config :software_portfolio_generator, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 

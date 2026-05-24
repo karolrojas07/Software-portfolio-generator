@@ -14,8 +14,9 @@ primary_region = "iad"
   release_command = "/app/bin/software_portfolio_generator eval \"SoftwarePortfolioGenerator.Release.migrate\""
 
 [[services]]
-  internal_port = 8080
   protocol = "tcp"
+  internal_port = 8080
+  processes = [“app”]
 
   [[services.http_checks]]
     path = "/"

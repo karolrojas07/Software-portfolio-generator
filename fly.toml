@@ -1,43 +1,35 @@
-app = "software-portfolio-generator"
-primary_region = "iad"
+# fly.toml app configuration file generated for software-portfolio-generator on 2026-05-25T20:33:55-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'software-portfolio-generator'
+primary_region = 'iad'
+kill_signal = 'SIGTERM'
 
 [build]
 
-[env]
-  PHX_SERVER = "true"
-  PORT = "8080"
-  DEFAULT_PROFILE_ID = "1"
-  ECTO_IPV6 = "true"
-  PHX_HOST = "software-portfolio-generator.fly.dev"
-
 [deploy]
-  #release_command = "/app/bin/software_portfolio_generator eval \"SoftwarePortfolioGenerator.Release.migrate\""
+  release_command = '/app/bin/migrate'
 
-[[services]]
-  protocol = "tcp"
+[env]
+  PHX_HOST = 'software-portfolio-generator.fly.dev'
+  PORT = '8080'
+
+[http_service]
   internal_port = 8080
-  processes = ["app"]
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
-  [[services.http_checks]]
-    path = "/"
-    interval = "10s"
-    timeout = "5s"
-    # Give the app more time to boot before failing health checks
-    grace_period = "60s"
+  [http_service.concurrency]
+    type = 'connections'
+    hard_limit = 1000
+    soft_limit = 1000
 
-  # Also add a TCP check to verify the BEAM VM is listening on the internal port
-  # This avoids false negatives when HTTP checks receive redirects (e.g., Plug.SSL).
-  [[services.tcp_checks]]
-    port = 8080
-    interval = "10s"
-    timeout = "5s"
-    grace_period = "60s"
-
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
-    force_https = true
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
+[[vm]]
+  memory = '1gb'
+  cpus = 1
+  memory_mb = 1024
